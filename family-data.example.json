@@ -1,0 +1,81 @@
+{
+  "intendedOutput": "Kindrd fictional starter family",
+  "stage": "Example",
+  "focusPersonId": "demo-avery",
+  "familyOrigin": "Fictional example family",
+  "recordingNotes": [
+    "Every person, relationship, date, place and note in this example is invented.",
+    "Use family-data.local.json for your own records. Do not commit personal data or generated exports."
+  ],
+  "people": [
+    {
+      "id": "demo-ellis",
+      "name": "Ellis Example",
+      "birth": {"year": 1956, "place": "Example Village", "dateCertainty": "uncertain"}
+    },
+    {
+      "id": "demo-robin",
+      "name": "Robin Example",
+      "birth": {"year": 1958, "month": 4, "day": 12, "place": "Example Village"}
+    },
+    {
+      "id": "demo-jordan",
+      "name": "Jordan Example",
+      "birth": {"year": 1980, "month": 1, "day": 10, "place": "Example City"},
+      "notes": ["An invented starter note showing how original notes are preserved."]
+    },
+    {
+      "id": "demo-sam",
+      "name": "Sam Example",
+      "birth": {"year": 1982, "month": 8, "day": 20}
+    },
+    {
+      "id": "demo-avery",
+      "name": "Avery Example",
+      "nameVariants": ["Avery Sample"],
+      "birth": {"year": 2003, "month": 6, "day": 15, "place": "Example City"}
+    },
+    {
+      "id": "demo-morgan",
+      "name": "Morgan Example",
+      "birth": {"year": 2007, "month": 9, "day": 3}
+    },
+    {
+      "id": "demo-riley",
+      "name": "Riley Example",
+      "birth": {"year": 2002, "month": 3, "day": 8}
+    },
+    {
+      "id": "demo-taylor",
+      "name": "Taylor Example",
+      "birth": {"year": 2024, "month": 11, "day": 2}
+    }
+  ],
+  "families": [
+    {
+      "id": "demo-grandparents",
+      "parentIds": ["demo-ellis", "demo-robin"],
+      "childIds": ["demo-jordan"]
+    },
+    {
+      "id": "demo-parents",
+      "parentIds": ["demo-jordan", "demo-sam"],
+      "childIds": ["demo-avery", "demo-morgan"]
+    },
+    {
+      "id": "demo-next-generation",
+      "parentIds": ["demo-avery", "demo-riley"],
+      "childIds": ["demo-taylor"]
+    }
+  ],
+  "researchLeads": [
+    {
+      "id": "demo-evidence",
+      "personIds": ["demo-avery"],
+      "status": "Example only",
+      "summary": "An invented evidence entry. Replace it with a source you have actually reviewed.",
+      "reference": "Fictional example; not a historical record.",
+      "sourceUrls": ["https://example.com/family-record"]
+    }
+  ]
+}

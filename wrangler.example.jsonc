@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "kindrd",
+  "main": "build/worker.mjs",
+  "compatibility_date": "2026-07-11",
+  "workers_dev": true,
+  "preview_urls": false,
+  "build": {"command": "npm run build"},
+  "vars": {
+    "APP_ORIGINS": "http://localhost:8788"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "kindrd",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "cloudflare/migrations"
+    }
+  ]
+}

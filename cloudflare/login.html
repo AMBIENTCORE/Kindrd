@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Kindrd</title>
+  <style>
+    :root { color: #25322c; background: #f6f8f7; font: 13px/1.5 Verdana, sans-serif; }
+    * { box-sizing: border-box; letter-spacing: 0; }
+    body { margin: 0; min-height: 100vh; min-height: 100dvh; display: grid; grid-template-rows: auto 1fr auto; background: radial-gradient(circle, #dce3df 1px, transparent 1px) 0 0 / 20px 20px; }
+    header, footer { padding: 22px 28px; font-size: 11px; color: #65726c; }
+    header { border-bottom: 1px solid #d8dfdb; background: #ffffffaa; }
+    a { color: #236b50; text-decoration: none; }
+    main { width: min(390px, calc(100% - 40px)); margin: auto; padding: 35px 0; }
+    h1 { margin: 0 0 6px; font: 36px/1.2 Georgia, serif; }
+    .subtitle { margin: 0 0 30px; color: #65726c; font-size: 11px; }
+    form { border-top: 2px solid #236b50; padding-top: 10px; }
+    label { display: block; margin: 18px 0 6px; font-size: 12px; }
+    input, button { width: 100%; min-height: 42px; padding: 10px 12px; font: inherit; border: 1px solid #bccac2; border-radius: 4px; }
+    input { background: white; color: #25322c; }
+    button { cursor: pointer; background: #236b50; color: white; border-color: #236b50; margin-top: 22px; }
+    button:hover { background: #19563e; }
+    button:disabled { cursor: wait; opacity: .65; }
+    :focus-visible { outline: 2px solid #315e7a; outline-offset: 3px; }
+    #error { color: #92394a; min-height: 36px; font-size: 12px; overflow-wrap: anywhere; }
+    footer { text-align: center; }
+  </style>
+</head>
+<body>
+  <header><a href="./">Kindrd</a></header>
+  <main>
+    <h1>Kindrd</h1>
+    <p class="subtitle">Private family record</p>
+    <form id="login-form">
+      <label for="email">Email (self-reported)</label>
+      <input id="email" name="email" type="email" autocomplete="username" maxlength="254" required>
+      <label for="password">Family password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" maxlength="256" required>
+      <button id="submit" type="submit">Open Kindrd</button>
+      <p id="error" role="alert" aria-live="polite"></p>
+    </form>
+  </main>
+  <footer>Family access</footer>
+  <script nonce="__FAMILY_NONCE__">
+    const form = document.getElementById('login-form');
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      const button = document.getElementById('submit');
+      const error = document.getElementById('error');
+      button.disabled = true;
+      error.textContent = '';
+      try {
+        const response = await fetch('./api/login', {method: 'POST', credentials: 'same-origin', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({email: form.elements.email.value, password: form.elements.password.value})});
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Could not sign in.');
+        form.elements.password.value = '';
+        location.replace('./');
+      } catch (failure) { error.textContent = failure.message; }
+      finally { button.disabled = false; }
+    });
+  </script>
+</body>
+</html>

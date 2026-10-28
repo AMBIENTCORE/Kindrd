@@ -1,0 +1,33 @@
+{
+  "name": "kindrd",
+  "version": "1.0.0",
+  "description": "A private, self-hostable family tree with a portable offline viewer.",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/build.mjs --example && node --test viewer.test.cjs cloudflare/worker.test.mjs scripts/build.test.mjs",
+    "dev": "npm run build && npm run db:local && wrangler dev --config wrangler.example.jsonc --port 8788 --var APP_ORIGINS:http://localhost:8788 --var FAMILY_PASSWORD:local-development-only --var SESSION_SECRET:local-development-session-secret-not-for-production",
+    "start": "npm run dev",
+    "db:local": "wrangler d1 migrations apply kindrd --local --config wrangler.example.jsonc && wrangler d1 execute kindrd --local --config wrangler.example.jsonc --file build/seed.sql",
+    "deploy": "npm run build && wrangler deploy --config wrangler.local.jsonc",
+    "db:migrate:remote": "wrangler d1 migrations apply kindrd --remote --config wrangler.local.jsonc",
+    "db:seed:remote": "wrangler d1 execute kindrd --remote --config wrangler.local.jsonc --file build/seed.sql",
+    "test:browser": "node scripts/build.mjs --example && node scripts/check-browser.mjs",
+    "test:collaboration": "node scripts/build.mjs --example && node scripts/check-collaboration.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "miniflare": "5.20260911.1-alpha",
+    "parse5": "8.0.1",
+    "playwright": "1.63.0",
+    "wrangler": "4.131.2"
+  },
+  "dependencies": {
+    "kiwi.js": "1.1.3"
+  }
+}
