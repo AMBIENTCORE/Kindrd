@@ -10,7 +10,6 @@
 <div align="center">
   <h1>Kindrd</h1>
   <p>
-    Your family, connected.
     <br />
     A self-hostable family tree with collaborative editing and a portable offline viewer.
     <br />
@@ -64,7 +63,7 @@
 
 [![Kindrd showing the fictional Example family and person details][product-screenshot]](images/screenshot.png)
 
-*Every person, relationship, date, place and note in this screenshot is fictional.*
+*Fictional data.*
 
 Kindrd helps you map family connections, keep track of the evidence behind them,
 and record what changes as your research grows. Use it as a standalone offline
